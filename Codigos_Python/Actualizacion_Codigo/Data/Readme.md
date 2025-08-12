@@ -1,18 +1,7 @@
-Perfecto, crearé un archivo `README.md` en español con formato para GitHub. Incluirá:
-
-* ✨ Explicación clara de la funcionalidad del script.
-* 📊 Descripción del procesamiento y cálculo de umbrales.
-* 📈 Visualización con matplotlib.
-* ⚙️ Parámetros configurables.
-* ✅ Casos de uso y cómo interpretar los resultados.
-
-Te aviso en cuanto el Markdown esté listo para revisión.
-
 
 # 📊 Detección de movimientos oculares en señal EOG
 
-Este código en Python carga datos de una señal EOG (electrooculografía) horizontal desde un archivo CSV, calcula **umbrales** estadísticos y detecta eventos significativos (picos positivos y negativos). Luego grafica la señal con los umbrales y marca las activaciones detectadas. A continuación se explica cada parte del código y su aplicación práctica en un entorno de análisis de datos (por ejemplo, un README de GitHub).
-
+Este código en Python carga datos de una señal EOG (electrooculografía) horizontal desde un archivo CSV, calcula **umbrales** estadísticos y detecta eventos significativos (picos positivos y negativos). Luego grafica la señal con los umbrales y marca las activaciones detectadas. A continuación se explica cada parte del código y su aplicación práctica en un entorno de análisis de datos.
 ## 📥 Carga de datos
 
 * **Librerías:** Se importan `pandas` para manejo de datos, `matplotlib.pyplot` para graficar y `os` para gestionar rutas de archivos.
@@ -55,7 +44,7 @@ Estos pasos cargan la señal y el vector de tiempo correspondientes para su aná
 
   ```python
   plt.axhline(threshold_high, color='C1', linestyle='--', label=f'Umbral alto = μ + {k}·σ')
-  plt.axhline(threshold_low,  color='C1', linestyle='--', label=f'Umbral bajo = μ \u2212 {k}·σ')
+  plt.axhline(threshold_low,  color='C1', linestyle='--', label=f'Umbral bajo = μ - {k}·σ')
   ```
 
   Estas líneas (`umbral alto` y `umbral bajo`) muestran los límites estadísticos calculados. Se les añade etiqueta y color distintivo. Además, se anotan sus valores numéricos junto a las líneas usando `plt.text`, para mayor claridad.
