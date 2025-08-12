@@ -1,0 +1,16 @@
+{
+  "serial_port": "",
+  "baud_rate": "9600",
+  "simulate_serial": true,
+  "conditions": [
+    {
+      "stream": "OpenViBE Stream (Data2) - 2ch",
+      "pos_lower": 150.0,
+      "pos_upper": 200.0,
+      "pos_letter": "W",
+      "neg_lower": -200.0,
+      "neg_upper": -150.0,
+      "neg_letter": "S"
+    }
+  ]
+}

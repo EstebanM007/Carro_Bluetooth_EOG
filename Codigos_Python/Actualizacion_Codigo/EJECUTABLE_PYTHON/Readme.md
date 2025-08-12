@@ -17,7 +17,7 @@
 * Identificar los canales utilizados si existen múltiples.
 * 📡 Después del mapeo de umbrales, el script **envía datos al puerto COM** para comunicarse con un **microcontrolador**.
 
-![Interfaz de Configuracion LSL y COM](Interfaz%20de%20Configuracion%20LSL%20y%20COM.png)
+![Interfaz de Configuracion LSL y COM](Interfaz.png)
 
 ## 🚀 Guía Profesional para Convertir tu Proyecto Python en un `.exe` OPCION 1
 
@@ -50,6 +50,10 @@ Lleva tu aplicación Python al siguiente nivel y compártela sin complicaciones:
   ```bash
   .\venv\Scripts\activate
   ```
+  ```bash
+  python.exe -m pip install --upgrade pip
+  ```
+  
 * En **macOS/Linux**:
 
   ```bash
@@ -87,6 +91,18 @@ pyinstaller --onefile Interfaz.py
 > ```
 >
 > Este comando empaqueta también la librería `lsl.dll` de `pylsl` dentro del ejecutable.
+>
+> ```bash
+> pyinstaller --onefile --icon="ruta_al_icono.ico" --windowed --add-binary ".\.venv\Lib\site-packages\pylsl\lib\lsl.dll;pylsl/lib" Interfaz.py
+> ```
+>
+> Este comando empaqueta también un icono al ejecutable (cambia la ruta segun el icon).
+>
+> ```bash
+> pyinstaller --onefile --icon="ruta_al_icono.ico" Interfaz.py
+> ```
+>
+> Este comando empaqueta el ejecutable con GUI esto permite habilitar las librerias que lo requieren.
 
 ---
 

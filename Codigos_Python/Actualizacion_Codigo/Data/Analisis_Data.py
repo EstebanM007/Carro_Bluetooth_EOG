@@ -4,13 +4,13 @@ import os
 
 # 1. Carga de datos
 ruta_actual = os.path.dirname(os.path.abspath(__file__))
-csv_path = os.path.join(ruta_actual, 'datos_streams.csv')
+csv_path = os.path.join(ruta_actual, 'datos.csv')
 df = pd.read_csv(csv_path, sep=';')
-time = df['Tiempo (s)']
-signal = df['Data2']  # Asumiendo que la columna de interez se llama 'Data2'
+time = df['Time (s)']
+signal = df['EOG1']  # Asumiendo que la columna de interez se llama 'name'
 
 # 2. Parámetros de umbral
-k = 3  # <-- aquí ajustas tu umbral (por ejemplo 1.5, 2, 2.5...)
+k = 2.2  # <-- aquí ajustas tu umbral (por ejemplo 1.5, 2, 2.5...)
 mu = signal.mean()
 sigma = signal.std()
 threshold_high = mu + k * sigma

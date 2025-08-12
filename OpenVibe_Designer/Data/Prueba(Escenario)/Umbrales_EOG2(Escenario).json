@@ -1,0 +1,11 @@
+[
+  {
+    "stream": "OpenViBE Stream (EOG2)",
+    "pos_lower": 482.1,
+    "pos_upper": 500.0,
+    "pos_letter": "W",
+    "neg_lower": -500.0,
+    "neg_upper": -481.2,
+    "neg_letter": "D"
+  }
+]

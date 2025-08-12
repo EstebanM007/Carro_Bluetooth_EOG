@@ -3,7 +3,7 @@ import serial
 import time
 # Este programa lee 1 stream de tipo 'EOG' (Electrooculografía) a través de LSL (Lab Streaming Layer)
 # Configuración del puerto serial
-serialPort = serial.Serial('COM7', 9600, timeout=1)
+serialPort = serial.Serial('COM4', 9600, timeout=1)
 print("Puerto serial configurado correctamente.")
 
 # Función para buscar streams de manera continua
@@ -39,10 +39,10 @@ while True:
         sample, _ = inlet_EOG.pull_sample(timeout=0.5)
         if sample:
             # Aplicar condiciones a la señal EOG
-            if 190 <= sample[0] <= 200:  # Usar directamente sample[0] para las condiciones
+            if 472.1 <= sample[0] <= 490:  # Usar directamente sample[0] para las condiciones
                 serialPort.write(b'D')  # Enviar comando 'D' por el puerto serial
                 print("D enviado")
-            elif -200 <= sample[0] <= -190:  # Usar directamente sample[0] para las condiciones
+            elif -490 <= sample[0] <= -481.1:  # Usar directamente sample[0] para las condiciones
                 serialPort.write(b'W')  # Enviar comando 'W' por el puerto serial
                 print("W enviado")
         else:

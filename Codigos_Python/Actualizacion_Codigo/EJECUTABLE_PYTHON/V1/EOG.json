@@ -1,0 +1,22 @@
+{
+  "serial_settings": {
+    "port": "",
+    "baudrate": "9600",
+    "simulate": true,
+    "show_console": true,
+    "auto_reconnect": true
+  },
+  "stream_conditions": [
+    {
+      "stream": "OpenViBE Stream (Data2)",
+      "stream_type": "auto",
+      "manual_name": "",
+      "pos_lower": 150.0,
+      "pos_upper": 200.0,
+      "pos_letter": "w",
+      "neg_lower": -200.0,
+      "neg_upper": -150.0,
+      "neg_letter": "s"
+    }
+  ]
+}
