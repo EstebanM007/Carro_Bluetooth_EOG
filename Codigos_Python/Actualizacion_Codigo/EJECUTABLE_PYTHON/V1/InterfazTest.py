@@ -370,6 +370,13 @@ class App:
                 return
                 
             try:
+                # Cerrar conexión existente si hay una
+                if hasattr(self, 'test_serial_connection') and self.test_serial_connection:
+                    try:
+                        self.test_serial_connection.close()
+                    except:
+                        pass
+            
                 self.test_serial_connection = serial.Serial(port, baudrate, timeout=1)
                 self.lbl_test_status.config(text=f"Puerto: {port} @ {baudrate}", fg="green")
                 self.btn_test_connect.config(state="disabled")
@@ -378,6 +385,8 @@ class App:
             except Exception as e:
                 messagebox.showerror("Error", f"No se pudo conectar al puerto: {e}")
                 self.lbl_test_status.config(text="Puerto: Error", fg="red")
+                self.btn_test_connect.config(state="normal")
+                self.btn_test_disconnect.config(state="disabled")
         else:
             # Modo simulación
             self.test_serial_connection = FakeSerial()
@@ -770,11 +779,23 @@ class App:
     def lsl_connection_loop(self):
         """Hilo principal para la lectura de streams LSL y envío por serial."""
         reconnection_check_time = time.time()
+        serial_check_time = time.time()
         
         try:
             while self.running:
                 current_time = time.time()
                 
+                # Verificar conexión serial cada segundo
+                if not self.simulate_serial.get() and current_time - serial_check_time > 1.0:
+                    try:
+                        # Intenta escribir un byte nulo para verificar la conexión
+                        self.serial_connection.write(b'\x00')
+                    except (serial.SerialException, OSError):
+                        # Si hay error, detener la conexión y habilitar reconexión
+                        self.master.after(0, self.handle_serial_disconnect)
+                        return
+                    serial_check_time = current_time
+            
                 # Verificar reconexiones cada 5 segundos
                 if self.auto_reconnect.get() and current_time - reconnection_check_time > 5.0:
                     self.check_and_reconnect_streams()
@@ -816,6 +837,29 @@ class App:
             traceback_str = traceback.format_exc()
             self.master.after(0, messagebox.showerror, "Error en hilo LSL", f"{e}\n\n{traceback_str}")
             self.master.after(0, self.stop_connection)
+
+    def handle_serial_disconnect(self):
+        """Maneja la desconexión del puerto serial."""
+        if not self.simulate_serial.get():
+            try:
+                self.serial_connection.close()
+            except:
+                pass
+        
+        messagebox.showwarning("Desconexión", 
+                          "Se perdió la conexión con el puerto serial.\n"
+                          "Puede intentar reconectar cuando el dispositivo esté disponible.")
+        
+        # Restablecer estado de los botones
+        self.btn_connect.config(state="normal")
+        self.btn_disconnect.config(state="disabled")
+        self.lbl_status.config(text="Estado: Desconectado")
+        self.enable_config_fields()
+        
+        # Detener el hilo pero mantener la aplicación funcionando
+        self.running = False
+        if hasattr(self, "serial_connection"):
+            delattr(self, "serial_connection")
 
     def check_and_reconnect_streams(self):
         """Verifica y reconecta streams desconectados."""

@@ -1,16 +1,17 @@
 {
-  "serial_port": "",
-  "baud_rate": "9600",
-  "simulate_serial": true,
+  "serial_port": "COM3 - USB-SERIAL CH340 (COM3)",
+  "baud_rate": "115200",
+  "simulate_serial": false,
+  "auto_reconnect_lsl": true,
   "conditions": [
     {
       "stream": "OpenViBE Stream (Data2) - 2ch",
-      "pos_lower": 150.0,
-      "pos_upper": 200.0,
+      "pos_lower": 482.07,
+      "pos_upper": 657.21,
       "pos_letter": "W",
-      "neg_lower": -200.0,
-      "neg_upper": -150.0,
-      "neg_letter": "S"
+      "neg_lower": -656.34,
+      "neg_upper": -481.2,
+      "neg_letter": "D"
     }
   ]
 }

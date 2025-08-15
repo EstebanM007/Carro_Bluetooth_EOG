@@ -1,0 +1,22 @@
+{
+  "serial_settings": {
+    "port": "COM3",
+    "baudrate": "115200",
+    "simulate": false,
+    "show_console": true,
+    "auto_reconnect": true
+  },
+  "stream_conditions": [
+    {
+      "stream": "OpenViBE Stream (Data2)",
+      "stream_type": "auto",
+      "manual_name": "",
+      "pos_lower": 482.1,
+      "pos_upper": 657.2,
+      "pos_letter": "W",
+      "neg_lower": -656.3,
+      "neg_upper": -481.2,
+      "neg_letter": "D"
+    }
+  ]
+}
